@@ -79,7 +79,7 @@ with tab1:
                 updated_data = pd.concat([data, new_row], ignore_index=True)
                 
                 connSheets.clear()
-                connSheets.write(updated_data)
+                connSheets.update(updated_data)
                 
                 st.success("Nova estação adicionada com sucesso!")
                 st.experimental_rerun()
