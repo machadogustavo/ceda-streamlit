@@ -11,7 +11,7 @@ import base64
 import pandas as pd
 import json
 
-connSheets = st.connection("gsheets", type=GSheetsConnection)
+conn = st.connection("gsheets", type=GSheetsConnection)
 
 st.title('Data Extract from CEDA')
 st.subheader('Gustavo Machado - UNIFESSPA')
@@ -27,9 +27,9 @@ with tab1:
     col1, col2 = st.columns(2)
     
     with col1:
-        @st.cache_data
+        # @st.cache_data
         def load_stations_data():
-            df_stations = connSheets.read()
+            df_stations = conn.read()
             return df_stations
         
         data_load_state = st.text('Carregando Estações...')
@@ -43,10 +43,11 @@ with tab1:
         
         if edit_mode:
             edited_data = st.data_editor(data_filtered, num_rows="dynamic")
+
             if st.button("Salvar Alterações"):
-                connSheets.update(worksheet="Estacoes",data=edited_data)
+                conn.update(worksheet="Estacoes",data=edited_data)
                 st.success("Alterações salvas com sucesso!")
-                st.experimental_rerun()
+                st.rerun()
         else:
             st.dataframe(data_filtered)
 
@@ -77,37 +78,17 @@ with tab1:
                 
                 updated_data = pd.concat([data, new_row], ignore_index=True)
                 
-                connSheets.clear()
-                connSheets.update(worksheet="Estacoes",data=updated_data)
+                conn.clear()
+                conn.update(worksheet="Estacoes",data=updated_data)
                 
                 st.success("Nova estação adicionada com sucesso!")
-                st.experimental_rerun()
+                st.rerun()
 
 
 
     
     
 with tab2:
-    DATE_COLUMN = 'date/time'
-    DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
-            'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
-
-    @st.cache_data
-    def load_data(nrows):
-        data = pd.read_csv(DATA_URL, nrows=nrows)
-        lowercase = lambda x: str(x).lower()
-        data.rename(lowercase, axis='columns', inplace=True)
-        data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-        return data
-
-    # Create a text element and let the reader know the data is loading.
-    data_load_state = st.text('Loading data...')
-    # Load 10,000 rows of data into the dataframe.
-    data = load_data(10000)
-    # Notify the reader that the data was successfully loaded.
-    data_load_state.text("Done! (using st.cache_data)")
-
-    st.subheader('Raw data')
     st.write(data)
     
 with tab3:
