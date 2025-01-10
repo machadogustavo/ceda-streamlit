@@ -43,9 +43,8 @@ with tab1:
         
         if edit_mode:
             edited_data = st.data_editor(data_filtered, num_rows="dynamic")
-            
             if st.button("Salvar Alterações"):
-                connSheets.update(edited_data)  # Corrigido aqui
+                connSheets.update(worksheet="Estacoes",data=edited_data)
                 st.success("Alterações salvas com sucesso!")
                 st.experimental_rerun()
         else:
@@ -79,7 +78,7 @@ with tab1:
                 updated_data = pd.concat([data, new_row], ignore_index=True)
                 
                 connSheets.clear()
-                connSheets.update(updated_data)
+                connSheets.update(worksheet="Estacoes",data=updated_data)
                 
                 st.success("Nova estação adicionada com sucesso!")
                 st.experimental_rerun()
