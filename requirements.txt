@@ -46,3 +46,6 @@ gcsfs
 st-files-connection
 streamlit_autorefresh
 st-gsheets-connection
+hydroeval
+xarray
+netCDF4
