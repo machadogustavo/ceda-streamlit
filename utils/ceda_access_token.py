@@ -60,17 +60,3 @@ def get_access_token(username, password):
         return token
     except ValueError as e:
         return str(e)
-
-
-ceda_credentials = st.secrets.get("ceda_credentials")
-if not ceda_credentials or not ceda_credentials.get("username") or not ceda_credentials.get("password"):
-    st.error("Vincule suas credenciais para processar estações com os datasets do CEDA!", icon=":material/passkey:")
-else:
-    username = ceda_credentials["username"]
-    password = ceda_credentials["password"]
-
-    token = get_access_token(username, password)
-    if "Erro ao gerar o token" in token:
-        st.error(token, icon=":material/warning:")
-    else:
-        st.success("Token de acesso ao CEDA obtido com sucesso!")
