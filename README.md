@@ -79,14 +79,10 @@ Utiliza o coeficiente Kling-Gupta Efficiency (KGE) para análise de similaridade
 project/
 ├── app.py              # Código principal do Streamlit
 ├── tabs/               # Pastas com as abas das páginas
-├── page0_started.py    # Página inicial
-├── page1_about.py      # Página "Sobre"
-├── page2_stations.py   # Página "Estações"
-├── page3_ceda_data.py  # Página "Dados CEDA"
-├── page4_inmet_data.py # Página "Dados INMET"
-├── page5_kge.py        # Página "Comparativo KGE"
-├── requirements.txt    # Dependências do projeto
+├── pages/
+├── utils/
 ├── README.md           # Documentação do projeto
+├── requirements.txt
 ```
 
 ### Configuração do `secrets.toml`
@@ -94,15 +90,17 @@ project/
 Crie o arquivo [`secrets.toml`](https://docs.streamlit.io/develop/api-reference/connections/secrets.toml) para armazenar informações sensíveis, como credenciais de APIs e configuração de AWS S3.
 
 ```toml
-[google_sheets]
+[connections.gsheets]
+spreadsheet= ""
+worksheet = ""
+project_id = ""
 client_email = "seu-email-do-google-cloud"
 private_key = "sua-chave-privada"
 
-[aws_s3]
-bucket_name = "seu-bucket-name"
-aws_access_key_id = "sua-access-key"
-aws_secret_access_key = "sua-secret-key"
-region = "sua-regiao"
+[ceda_credentials]
+username = ""
+password = ""
+access_token = ""
 ```
 
 ---

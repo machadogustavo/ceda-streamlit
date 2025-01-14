@@ -149,5 +149,5 @@ else:
         else:
             if st.button("Processar"):
                 with st.spinner("Processando dados..."):
-                    # Lógica de processamento aqui
+
                     st.success("Processamento concluído com sucesso!")
