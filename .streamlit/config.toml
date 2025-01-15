@@ -1,0 +1,15 @@
+# .streamlit/config.toml
+
+[theme]
+base="dark"
+primaryColor="#FFCC00"
+backgroundColor="#1A1A1A"
+secondaryBackgroundColor="#404040"
+textColor="#e0e0e0"
+
+[client]
+showSidebarNavigation = true
+toolbarMode = "viewer"
+
+[server]
+runOnSave = true

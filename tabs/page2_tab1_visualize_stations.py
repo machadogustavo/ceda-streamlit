@@ -10,7 +10,8 @@ def convert_coordinates(coord_str):
         return None
 
 def render():
-    st.title("Visualização das Estações Meteorológicas INMET")
+    st.title("Visualizar")
+    st.header("Estações Meteorológicas INMET")    
     
     conn = get_connection()
     
@@ -24,33 +25,34 @@ def render():
     
     df = load_stations_data()
     
-    with st.sidebar:
-        st.header("Filtros")
-        
-        # Filtro de Estados
+    col1, col2, col3 = st.columns(3)
+    
+    
+    st.header("Filtros")
+    
+    with col1:
         estados = sorted(df['SG_ESTADO'].unique())
         selected_estados = st.multiselect(
-            'Selecione os Estados:',
-            estados,
-            default=['PA']
-        )
-        
-        # Filtro dinâmico de Estações baseado nos estados selecionados
+                    'Selecione os Estados:',
+                    estados,
+                    default=['PA']
+                )
+    with col2:
         estacoes_disponiveis = sorted(df[df['SG_ESTADO'].isin(selected_estados)]['DC_NOME'].unique())
         selected_estacoes = st.multiselect(
             'Selecione as Estações:',
             estacoes_disponiveis,
             default=[]
         )
-        
-        # Filtro de Situações
+    
+    with col3:
         situacoes = sorted(df['CD_SITUACAO'].unique())
         selected_situacoes = st.multiselect(
             'Selecione a Situação:',
             situacoes,
             default=['Operante']
         )
-        
+
     if not selected_estados:
         st.warning("⚠️ Por favor, selecione pelo menos um estado!")
         return

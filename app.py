@@ -1,5 +1,12 @@
 import streamlit as st
 
+def load_css(file_path):
+    with open(file_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+css_file_path = "./resources/style/style.css"
+load_css(css_file_path)
+
 page_about = st.Page("pages/0_ℹ️_About.py", title="Sobre", icon=":material/info:")
 page_started = st.Page("pages/1_🌟_Started.py", title="Início", icon=":material/start:")
 page_stations = st.Page("pages/2_📊_Stations.py", title="Visualizar/Gerenciar", icon=":material/dataset:")

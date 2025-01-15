@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 from utils.gsheets_connection import get_connection
 
-st.set_page_config(page_title="Dados INMET", layout="wide")
-
 conn = get_connection()
 
 def load_and_prepare_data():
