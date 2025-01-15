@@ -5,4 +5,8 @@ st.set_page_config(
 	initial_sidebar_state="auto", 
 	page_title="Data Extract",
 	page_icon=":material/cloud:",
+	menu_items={
+			'Get Help': '',
+			'Report a bug': "",
+		}
 )
