@@ -70,7 +70,12 @@ def render():
     data_filtered = data[list(display_columns.keys())].rename(columns=display_columns)
 
     st.subheader("Tabela de Dados - Estações")
-    st.dataframe(data_filtered, use_container_width=True)
+    st.dataframe(data_filtered, use_container_width=True,  column_config={
+                            "Código da Estação": st.column_config.NumberColumn(format="%d"),
+                            "Latitude": st.column_config.NumberColumn(format="%d"),
+                            "Longitude": st.column_config.NumberColumn(format="%d"),
+                            "Situação": st.column_config.TextColumn()
+                        })
     
     if st.button("Nova Estação", type="secondary"):
         new_station_dialog(data, display_columns, conn)

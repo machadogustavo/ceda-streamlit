@@ -58,26 +58,29 @@ def render():
 
                 token_generation_status = st.empty()
 
-                col1, col2 = st.columns(2)
-                with col1:
-                    if st.button("Gerar Novo Token"):
-                        try:
-                            with st.spinner("Gerando Token..."):
-                                new_token = get_access_token(username, password)
-                                if new_token:
-                                    st.session_state["ceda_token"] = new_token
-                                    token_generation_status.success("Token gerado!")
-                                    st.rerun()
-                                else:
-                                    token_generation_status.error("Erro ao gerar token.")
-                        except Exception as e:
-                            token_generation_status.error(f"Erro: {str(e)}")
-                
-                with col2:
-                    manual_token = st.text_input("Token Manual:", type="password")
-                    if manual_token and st.button("Registrar Token"):
-                        st.session_state["ceda_token"] = manual_token
-                        st.rerun()
+                if st.button("Gerar Novo Token"):
+                    try:
+                        with st.spinner("Gerando Token..."):
+                            new_token = get_access_token(username, password)
+                            if new_token:
+                                st.session_state["ceda_token"] = new_token
+                                token_generation_status.success("Token gerado!")
+                                st.rerun()
+                            else:
+                                token_generation_status.error("Erro ao gerar token.")
+                    except Exception as e:
+                        token_generation_status.error(f"Erro ao gerar Token!")
+                        print(f"Erro ao gerar token: {str(e)}")
+                        
+                        st.caption("Tente inserir manulmente um token")
+                        
+                        manual_token = st.text_input("Token Manual:", type="password")
+                        if manual_token and st.button("Registrar Token"):
+                            st.session_state["ceda_token"] = manual_token
+                            st.rerun()
+            
+
+              
         else:
             st.success("Token Ativo ✓")
             if st.button("Limpar Token"):

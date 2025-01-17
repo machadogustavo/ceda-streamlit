@@ -1,24 +1,16 @@
 import streamlit as st
-from tabs import page4_tab1_inmet_about, page4_tab2_visualize_dashboard,page4_tab3_visualize_dataset
+from tabs import page4_tab1_inmet_about, page4_tab2_visualize_inmet, page4_tab3_visualize_dataset
 
-tab1, tab2, tab3= st.tabs(["Sobre", "Dashboard","Dataset"])
+list_of_tabs = ["Sobre", "Dashboard", "Dataset"]
 
-with tab1:
+tabs = st.tabs(list_of_tabs)
+
+
+with tabs[0]:
     page4_tab1_inmet_about.render()
 
-with tab2:
-    page4_tab2_visualize_dashboard.render()
-    
-with tab3:
+with tabs[1]:
+    page4_tab2_visualize_inmet.render()
+
+with tabs[2]:
     page4_tab3_visualize_dataset.render()
-
-
-
-
-
-
-
-
-
-
-
