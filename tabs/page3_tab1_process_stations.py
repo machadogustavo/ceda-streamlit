@@ -48,7 +48,7 @@ def render():
         
         if not token:
             st.text("Para utilização dos datasets do CEDA de forma remota, gere um novo token com suas credenciais CEDA.")
-            st.warning("Gere ou insira um token para continuar.")
+            st.warning("Gere um token para continuar.")
             
             if not ceda_credentials or not ceda_credentials.get("username") or not ceda_credentials.get("password"):
                 st.error("Vincule suas credenciais para processar estações com os datasets do CEDA!", icon=":material/passkey:")

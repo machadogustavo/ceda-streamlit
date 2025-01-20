@@ -99,7 +99,7 @@ def render():
         latitude=brazil_lat,
         longitude=brazil_lon,
         zoom=3,
-        pitch=0
+        pitch=50
     )
 
     chart = pdk.Deck(
